@@ -1,30 +1,36 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        InputStreamReader isr = new InputStreamReader(System.in);
-        BufferedReader br = new BufferedReader(isr);
+    static Set<Integer> num = new HashSet<>();
+    private static void d(int n){
+        if(n > 10000) return;
+        int ten;
+        int result = n;
 
-        OutputStreamWriter osw = new OutputStreamWriter(System.out);
-        BufferedWriter bw = new BufferedWriter(osw);
-        String temp;
+        for(int i=4; i>=0; i--){
+            ten = (int)Math.pow(10, i);
+            if(n/ten == 0) continue;
 
-        int num = Integer.parseInt(br.readLine());
-        for (int i = 0;i < num; i++) {
-            temp = br.readLine();
-            int index = temp.indexOf(" ");
-            int num1 = Integer.parseInt(temp.substring(0, index));
-            int num2 = Integer.parseInt(temp.substring(index + 1));
-
-            bw.write(Integer.toString(num1 + num2) + "\n");
+            result += n/ten;
+            n -= n/ten*ten;
         }
+        num.remove(result);
+        d(result);
+    }
+    public static void main(String[] args) throws Exception {
+        Iterator<Integer> iter;
+        for(int i=1; i<=10000; i++)
+            num.add(i);
 
-        bw.flush();
-        bw.close();
-        br.close();
+        for(int i=1; i<=10000; i++){
+            d(i);
+        }
+        iter = num.iterator();
+        while(iter.hasNext()){
+            System.out.print(iter.next() + " ");
+        }
     }
 
 }
