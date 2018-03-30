@@ -1,35 +1,26 @@
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Scanner;
 import java.util.Set;
 
 public class Main {
-    static Set<Integer> num = new HashSet<>();
-    private static void d(int n){
-        if(n > 10000) return;
-        int ten;
-        int result = n;
 
-        for(int i=4; i>=0; i--){
-            ten = (int)Math.pow(10, i);
-            if(n/ten == 0) continue;
-
-            result += n/ten;
-            n -= n/ten*ten;
-        }
-        num.remove(result);
-        d(result);
-    }
     public static void main(String[] args) throws Exception {
-        Iterator<Integer> iter;
-        for(int i=1; i<=10000; i++)
-            num.add(i);
+        Scanner s = new Scanner(System.in);
 
-        for(int i=1; i<=10000; i++){
-            d(i);
+        String c = s.nextLine();
+        int[] alphabet = new int[26];
+
+        for(int i = 0; i < alphabet.length; i++){
+            alphabet[i] = -1;
         }
-        iter = num.iterator();
-        while(iter.hasNext()){
-            System.out.print(iter.next() + " ");
+        for(int i = 0; i < c.length(); i++){
+            int index = c.charAt(i) - 'a';
+            if(alphabet[index] == -1)
+                alphabet[c.charAt(i) - 'a'] = i;
+        }
+        for(int i = 0; i < alphabet.length; i++){
+            System.out.print(alphabet[i] + " ");
         }
     }
 
