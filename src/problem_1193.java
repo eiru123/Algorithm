@@ -23,5 +23,6 @@ public class problem_1193 {
         }
         if(idx % 2 == 0) System.out.print(num1 + "/" + num2);
         else System.out.print(num2 + "/" + num1);
+        //git test
     }
 }
